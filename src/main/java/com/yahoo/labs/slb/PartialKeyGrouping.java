@@ -29,8 +29,8 @@ public class PartialKeyGrouping implements CustomStreamGrouping, Serializable {
         List<Integer> boltIds = new ArrayList<Integer>(1);
         if (values.size() > 0) {
             String str = values.get(0).toString(); // assume key is the first field
-            int firstChoice = (int) Math.abs(h1.hashBytes(str.getBytes()).asLong()) % this.targetTasks.size();
-            int secondChoice = (int) Math.abs(h2.hashBytes(str.getBytes()).asLong()) % this.targetTasks.size();
+            int firstChoice = (int) (Math.abs(h1.hashBytes(str.getBytes()).asLong()) % this.targetTasks.size());
+            int secondChoice = (int) (Math.abs(h2.hashBytes(str.getBytes()).asLong()) % this.targetTasks.size());
             int selected = targetTaskStats[firstChoice] > targetTaskStats[secondChoice] ? secondChoice : firstChoice;
             boltIds.add(targetTasks.get(selected));
             targetTaskStats[selected]++;
